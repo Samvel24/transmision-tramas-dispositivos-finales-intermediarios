@@ -155,3 +155,8 @@ Es importante mencionar que en la simulación se puede observar que debido a que
 
 En resumen, el viaje que realiza la información desde PC0 hasta PC3 se va desencapsulando y encapsulando en cada dispositivo intermediario por el que va pasando, en caso de los routers esto sucede hasta la capa 3 y en el caso de los conmutadores ocurre hasta la capa 2. Además, todo el tiempo se van modificando las direcciones MAC en el encabezado de la trama, esto nos permite transmitir la información de manera correcta y de manera local en cada LAN, por último, para que una LAN pueda comunicarse con el exterior, tenemos que utilizar los routers para que estos agreguen un encabezado IP en la capa 3 y con esto la información puede llegar a diferentes redes LAN.
 
+**Información adicional:** Simulación realizada en Cisco Packet Tracer versión 8.2.2
+
+***
+
+2025 [Samuel Ramirez](https://gitlab.com/Samvel24)
