@@ -131,7 +131,7 @@ Cuando generamos un tráfico (ping) desde PC0 hacia PC3 que está fuera de la re
 
 ![Generación de un broadcast para encontrar la MAC de la puerta de enlace](/img/fig25.png)
 
-Para que la trama salga de la red LAN tenemos que ejecutar algunos comandos en la interfaz de línea de comandos de los enrutadores 0 y 1. Estos comandos se deben colocar en el modo de configuración del router, para entrar en este modo primero se debe entrar en el modo privilegiado con el comando enable y luego de ahí ya podemos entrar en el modo configuración con configure terminal, en este modo la terminal muestra el prompt como Router(config)#. Los comandos a ingresar son los siguientes.
+Para que la trama salga de la red LAN tenemos que ejecutar algunos comandos en la interfaz de línea de comandos de los enrutadores 0 y 1. Estos comandos se deben colocar en el modo de configuración del router, para entrar en este modo primero se debe entrar en el modo privilegiado con el comando *enable* y luego de ahí ya podemos entrar en el modo configuración con *configure terminal*, en este modo la terminal muestra el prompt como *Router(config)#*. Los comandos a ingresar son los siguientes.
 * En el router cero vamos a colocar: *ip route 0.0.0.0 0.0.0.0 g0/0/1*
 * En el router uno vamos a ejecutar: *ip route 0.0.0.0 0.0.0.0 g0/0/0*
 
