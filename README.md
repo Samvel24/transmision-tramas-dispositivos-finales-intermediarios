@@ -95,6 +95,8 @@ Vale la pena recordar que las direcciones MAC son direcciones físicas grabadas 
 
 Cuando la información respondida por PC2 llega a PC0, podemos ver en la tabla ARP de esta última computadora que se han registrado las direcciones de la fuente (PC2), es decir, también ha almacenado datos en su caché.
 
+Es importante mencionar que todos los dispositivos finales tienen una caché ARP.
+
 ![Caché ARP de PC0 que gurda las direcciones de PC2](/img/fig17.png)
 
 Después de lo anterior, ya que PC0 tiene la dirección MAC del destino, ya se van a mandar los paquetes ICMP, estos paquetes se van a enviar a PC2 y luego se van a regresar a PC0 para confirmar que se han recibido en la computadora 2, en este proceso de envíos los datos van a pasar por el switch, sabemos que en este dispositivo los datos se desencapsulan hasta capa 2. Cuando la respuesta ha llegado a PC0, entonces va a haber un mensaje en la terminal mencionando que la computadora 2 ha respondido correctamente.
@@ -109,8 +111,6 @@ En la imagen, en los detalles de la simulación, donde se muestra el listado de 
 Respecto al tema de la difusión, esta ocurre cuando la primer trama sale desde PC0 para encontrar la dirección MAC destino, esto se puede comenzar a observar en el PDU del switch, el PDU de entrada tiene como dirección destino *FFFF.FFFF.FFFF*, es decir, se está generando un tráfico de difusión y la información se está enviando a todos los dispositivos, **esta información la ha puesto el protocolo ARP, este protocolo no se necesita encender, está al servicio de nuestro dispositivo.**
 
 ![Generación de una difusión por el protocolo ARP para encontrar una dirección MAC destino](/img/fig20.png)
-
-Es importante mencionar que todos los dispositivos finales tienen una caché ARP. 
 
 Ahora bien, si ejecutamos el comando ping desde PC2 y apuntamos hacia PC0 se van a enviar puros paquetes ICMP y los ARP ya no se van a enviar porque la caché ARP ya tiene las direcciones MAC entre las 2 computadoras que se están comunicando. Por cada ping que se envía hacia PC0 se van a marcar con determinado color los paquetes ICMP enviados durante la transmisión del ping, esto se puede ver en la lista de eventos.
 
