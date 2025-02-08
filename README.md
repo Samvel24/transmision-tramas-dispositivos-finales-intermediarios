@@ -1,6 +1,8 @@
 # Simulación para observar la transmisión de las tramas a través de los distintos dispositivos intermediarios y finales que estén presentes en una red
+## Introducción
 En esta simulación se va a ver cómo las tramas viajan a través de los distintos dispositivos intermediarios y finales que estén presentes en la red, además se va a ver como se genera el encabezado y como va a ir cambiando en función de los dispositivos por los cuales vaya atravesando.
 
+## Configuración de la red
 En esta simulación se van a colocar 4 computadoras, 2 routers y un switch y se van a realizar las conexiones respectivas, dispositivos de capas distintas se conectan con cable directo y dispositivos de la misma capa con cable cruzado, además, recordemos que una pc es similar a un router, entonces podemos considerarlos de la misma capa, por tanto podemos conectar estos dispositivos con un cable cruzado.
 En packet tracer se tiene los siguientes tipos de cableados:
 * Copper straight-through – cobre directo (este se muestra con una linea recta)
@@ -56,6 +58,7 @@ El proceso descrito anteriormente, se va a realizar en la red con dirección 172
 
 En el caso del rango de red 10.0.0.0 vamos a usar las direcciones 10.0.0.1 y 10.0.0.2 para las interfaces faltantes de los routers, además debemos colocar la mascara respectiva que es 255.255.255.0.
 
+## Comunicaciones al interior de una LAN
 Ya que hemos configurado todo lo relacionado a las direcciones IP, vamos a elegir la sección de simulación y vamos a editar los filtros, vamos a seleccionar ICMP y ARP, el protocolo ARP (Address Resolution Protocol) nos sirve para conseguir las direcciones MAC destino.
 
 ![Selección de los protocolos ARP e ICMP en los filtros del programa](/img/fig10.png)
@@ -102,13 +105,14 @@ En la imagen, en los detalles de la simulación, donde se muestra el listado de 
 
 ![Envío total de pings hacia PC2](/img/fig19.png)
 
-La generación de la difusión ocurre cuando la primer trama sale desde PC0 para encontrar la dirección MAC destino, esto se puede comenzar a observar en el PDU del switch, el PDU de entrada tiene como dirección destino *FFFF.FFFF.FFFF*, es decir, se está generando un tráfico de difusión y la información se está enviando a todos los dispositivos, **esta información la ha puesto el protocolo ARP, este protocolo no se necesita encender, está al servicio de nuestro dispositivo.**
+## Tráfico de difusión para encontrar una dirección MAC
+Respecto al tema de la difusión, esta ocurre cuando la primer trama sale desde PC0 para encontrar la dirección MAC destino, esto se puede comenzar a observar en el PDU del switch, el PDU de entrada tiene como dirección destino *FFFF.FFFF.FFFF*, es decir, se está generando un tráfico de difusión y la información se está enviando a todos los dispositivos, **esta información la ha puesto el protocolo ARP, este protocolo no se necesita encender, está al servicio de nuestro dispositivo.**
 
 ![Generación de una difusión por el protocolo ARP para encontrar una dirección MAC destino](/img/fig20.png)
 
 Es importante mencionar que todos los dispositivos finales tienen una caché ARP. 
 
-Si ejecutamos el comando ping desde PC2 y apuntamos hacia PC0 se van a enviar puros paquetes ICMP y los ARP ya no se van a enviar porque la caché ARP ya tiene las direcciones MAC entre las 2 computadoras que se están comunicando. Por cada ping que se envía hacia PC0 se van a marcar con determinado color los paquetes ICMP enviados durante la transmisión del ping, esto se puede ver en la lista de eventos.
+Ahora bien, si ejecutamos el comando ping desde PC2 y apuntamos hacia PC0 se van a enviar puros paquetes ICMP y los ARP ya no se van a enviar porque la caché ARP ya tiene las direcciones MAC entre las 2 computadoras que se están comunicando. Por cada ping que se envía hacia PC0 se van a marcar con determinado color los paquetes ICMP enviados durante la transmisión del ping, esto se puede ver en la lista de eventos.
 
 ![Paquetes ICMP del primer ping](/img/fig21.png)
 
@@ -122,6 +126,7 @@ Con todo esto, podemos observar que ya no es necesario salir a buscar las MAC de
 
 Cabe recalcar que podemos usar el botón Reset Simulation para borrar la lista de eventos de un proceso determinado para así tener limpia esa ventana de eventos y poder visualizar de mejor manera los eventos de otro proceso, en este caso para observar los eventos en los que se manda cada ping desde PC2 hasta PC0.
 
+## Comunicación de una LAN con otra LAN
 Cuando generamos un tráfico (ping) desde PC0 hacia PC3 que está fuera de la red, entonces de nuevo se genera un proceso ARP, esto ocurre porque sabemos que la comunicación dentro de la LAN es a través de direcciones MAC pero para dirigirnos hacia dispositivos que están fuera de la red se necesita del gateway por defecto y en la caché de PC0 no tenemos la dirección MAC del gateway. Con esto, ARP va a generar un broadcast y a quien está buscando es a 192.168.0.1 (la dirección por defecto del gateway), además, con esto se va a obtener la dirección MAC del gateway y se va a guardar en la caché de PC0.
 
 ![Generación de un broadcast para encontrar la MAC de la puerta de enlace](/img/fig25.png)
